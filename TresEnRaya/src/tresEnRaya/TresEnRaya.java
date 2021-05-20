@@ -269,9 +269,7 @@ public class TresEnRaya {
 
 		
 
-	
-
-	public static void main(String[] args) {
+	public static void impo() {
 		// creamos las variables necesarias para el programa
 		char jugador1 = 'X';
 		char jugador2 = 'O';
@@ -342,6 +340,10 @@ public class TresEnRaya {
 		}
 		verTablero();
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
+	}
+
+	public static void main(String[] args) {
+		impo();
 		
 	
 	}
