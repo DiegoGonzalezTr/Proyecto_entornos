@@ -1,6 +1,11 @@
 package tresEnRaya;
 
 import java.util.Scanner;
+/**
+ * 
+ * @author Diego Gonzalez Tripero.
+ *
+ */
 
 public class TresEnRaya {
 	public static char array_tablero[][] = new char[3][3];
