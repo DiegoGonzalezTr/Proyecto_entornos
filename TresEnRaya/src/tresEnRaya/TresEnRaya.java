@@ -2,9 +2,9 @@ package tresEnRaya;
 
 import java.util.Scanner;
 /**
- * 
- * @author Diego Gonzalez Tripero.
- *
+ * @author Diego Gonzalez Tripero. [Más productivo].
+ * @author Javier Hernandez Fernandez.
+ * @author Jesús Blanco Antoraz.
  */
 
 public class TresEnRaya {
@@ -13,6 +13,28 @@ public class TresEnRaya {
 	public static Scanner sc = new Scanner(System.in);
 	public static  String nombreJugadorSc1, nombreJugadorSc2;
 	public static boolean empiezaJugador1=false,empiezaJugador2=false;
+	
+	// Contadores de juego:
+	public static int contador_victorias_jug1=0;
+	public static int contador_victorias_jug2=0;
+	public static int contador_derrotas_jug1=0;
+	public static int contador_derrotas_jug2=0;
+	public static int contador_empates_jug1=0;
+	public static int contador_empates_jug2=0;
+	
+	
+	/** Muestra información de los contadores del juego, <br>
+	 * una vez termina la partida, se muestran, se suma +1 a las victorias y +1 <br>
+	 * a las derrotas de solamente el perdedor.<br>
+	 * @author Jesús Blanco Antoraz.
+	 */
+	public static void MostrarInfoContadores()
+	{	System.out.println(" *** | INFO CONTADORES | ***\n"
+		+nombreJugadorSc1+" \tVict/ "+contador_victorias_jug1+" Derr/ "+contador_derrotas_jug1+" Empt/ "+contador_empates_jug1+"\n" 
+		+nombreJugadorSc2+" \tVict/ "+contador_victorias_jug2+" Derr/ "+contador_derrotas_jug2+" Empt/ "+contador_empates_jug2+"\n"
+		);
+	}
+	
 	// Para insertar datos en la matriz hacemos lo siguiente:
 	public static void insetarDatos() {
 		for (int i = 0; i < array_tablero.length; i++) {
@@ -23,16 +45,32 @@ public class TresEnRaya {
 		}
 	}
 
+	
+	/**
+	 * Se definen todos los casos de victorias que puedan realizar los jugadores<br>
+	 * sobre el tablero, realizando distintas acciones y llamadas a métodos.
+	 * @param array_tablero
+	 * @param jugador1
+	 * @param jugador2
+	 * @param tablero_vacio
+	 * @author Diego Gonzalez Tripero. [Cualquier cosa comentarle a el].
+	 */
 	public static void quienGana(char[][] array_tablero, char jugador1, char jugador2, char tablero_vacio) {
 
 		char  ficha = ganadorLinea(array_tablero,tablero_vacio);
 		
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
-			
 			System.out.println("Gana  "+ nombreJugadorSc1 + " porque ha hecho una linea");
+			contador_victorias_jug1++;
+			contador_derrotas_jug2++;
+			MostrarInfoContadores();
+			
 		} else {
 			System.out.println("Gana  "+ nombreJugadorSc2 + " porque ha hecho una linea");
+			contador_victorias_jug2++;
+			contador_derrotas_jug1++;
+			MostrarInfoContadores();
 			}
 		}
 		
@@ -44,8 +82,14 @@ public class TresEnRaya {
 			if (ficha == jugador1) {
 			
 			System.out.println("Gana  "+ nombreJugadorSc1 + " porque ha hecho una columna");
+			contador_victorias_jug1++;
+			contador_derrotas_jug2++;
+			MostrarInfoContadores();
 		} else {
 			System.out.println("Gana "+ nombreJugadorSc2 +" porque ha hecho una columna");
+			contador_victorias_jug2++;
+			contador_derrotas_jug1++;
+			MostrarInfoContadores();
 			}
 		}
 		
@@ -53,10 +97,16 @@ public class TresEnRaya {
 		ficha = ganadorDiagonalPrincipal(array_tablero, tablero_vacio);
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
-			
 			System.out.println("Gana  "+ nombreJugadorSc1  +" porque ha hecho una diagonal principal");
+			contador_victorias_jug1++;
+			contador_derrotas_jug2++;
+			MostrarInfoContadores();
+			
 		} else {
 			System.out.println( "Gana  "+ nombreJugadorSc2 + " porque ha hecho una diagonal principal");
+			contador_victorias_jug2++;
+			contador_derrotas_jug1++;
+			MostrarInfoContadores();
 			}
 		}	
 		
@@ -66,10 +116,17 @@ public class TresEnRaya {
 		
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
-			
 			System.out.println("Gana  "+ nombreJugadorSc1 + " porque ha hecho una diagonal inversas");
+			contador_victorias_jug1++;
+			contador_derrotas_jug2++;
+			MostrarInfoContadores();
+			
 		} else {
 			System.out.println("Gana  " +nombreJugadorSc2 +" porque ha hecho una diagonal inversa");
+			contador_victorias_jug2++;
+			contador_derrotas_jug1++;
+			MostrarInfoContadores();
+			
 			}
 		}	
 	}
@@ -137,7 +194,6 @@ public class TresEnRaya {
 
 	// Comprobar fila
 	/**
-	 * 
 	 * @param array_tablero
 	 * @param fil
 	 * @return
@@ -222,8 +278,8 @@ public class TresEnRaya {
 		return tablero_vacio;
 
 	}
+	
 	/**
-	 * 
 	 * @param array_tablero
 	 * @param tablero_vacio
 	 * @return me devuelve la ficha que ha hecho una diagonal principal
@@ -295,7 +351,7 @@ public class TresEnRaya {
 			
 			do {
 				nombres_de_jugadores(turno);
-				CaraOCruz.LanzarMonedaCaraOCruz();
+				//CaraOCruz.LanzarMonedaCaraOCruz();
 				verTablero();
 				correcto = false;
 							
