@@ -60,7 +60,7 @@ public class MenuFinal {
 
 	
 	public static void main(String[] args) {
-		Menu_inicio();
+		Menu_final();
 	}
 
 }
