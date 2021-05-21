@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 /**
  * @author Jesús Blanco Antoraz
+ * @version 0.4.3 21/05/2021 12:38
  */
 
 public class Menu {
@@ -12,7 +13,10 @@ public class Menu {
 	public static int opcion=0;
     public static boolean check = false;
     
-	
+	/**
+	 * Muestra el menú del programa, cuando termine de acabar una opción y recorra<br>
+	 * el método que conlleve el uso de una opción, volverá al menú de inicio.
+	 */
 	public static void Menu_inicio()
 	{	System.out.println
 			(" * * * MENÚ TRES EN RAYA * * * \n"
@@ -30,11 +34,12 @@ public class Menu {
 				if (opcion==1) {
 					System.out.println(" \n*** Ha selecionado: Un jugador ***");
 					//Llamar a Método.
-					TresEnRaya.main(null);
+					TresEnRaya.llamada(null);
 					
 				} else if (opcion==2) {
 					System.out.println(" \n*** Ha selecionado: Dos jugadores ***");
 					//Llamar a Método.
+					
 				} else if (opcion==3) {
 					System.out.println(" \n*** Ha selecionado: Reglas del juego ***");
 					Normas_lectura();

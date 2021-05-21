@@ -12,6 +12,7 @@ public class TresEnRaya {
 	public static char tablero_vacio = '/';
 	public static Scanner sc = new Scanner(System.in);
 	public static  String nombreJugadorSc1, nombreJugadorSc2;
+	public static boolean empiezaJugador1=false,empiezaJugador2=false;
 	// Para insertar datos en la matriz hacemos lo siguiente:
 	public static void insetarDatos() {
 		for (int i = 0; i < array_tablero.length; i++) {
@@ -122,7 +123,11 @@ public class TresEnRaya {
 		}
 	}
 
-	public static void turnos(boolean turno) {
+
+	/* Los jugadores especifican los nombres, por defecto el jugador 1 y 2. Indican nombre
+	 * Sirve para reconocer quien tiene que jugar y quien comienza.
+	 */
+	public static void nombres_de_jugadores(boolean turno) {
 		if (turno) {
 			System.out.println(nombreJugadorSc1);
 		} else {
@@ -269,9 +274,7 @@ public class TresEnRaya {
 
 		
 
-	
-
-	public static void main(String[] args) {
+	public static void impo() {
 		// creamos las variables necesarias para el programa
 		char jugador1 = 'X';
 		char jugador2 = 'O';
@@ -280,9 +283,9 @@ public class TresEnRaya {
 		int fil, colum;
 		boolean filaCorrecta, ColumnaCorrecta, correcto;
 		
+		//Indicamos nombres de los jugadores al comenzar el programa.
 		System.out.println("Introduce el nombre del jugador 1");
 		nombreJugadorSc1= String.valueOf(sc.nextLine());
-		
 		System.out.println("Introduce el nombre del jugador 2");
 		nombreJugadorSc2 = String.valueOf(sc.nextLine());
 		
@@ -291,7 +294,8 @@ public class TresEnRaya {
 			
 			
 			do {
-				turnos(turno);
+				nombres_de_jugadores(turno);
+				CaraOCruz.LanzarMonedaCaraOCruz();
 				verTablero();
 				correcto = false;
 							
@@ -342,8 +346,14 @@ public class TresEnRaya {
 		}
 		verTablero();
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
+	}
+
+	public static void llamada(String[] args) {
+		impo();
 		
 	
 	}
+
+	
 
 }
