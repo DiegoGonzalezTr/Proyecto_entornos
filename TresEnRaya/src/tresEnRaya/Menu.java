@@ -33,7 +33,7 @@ public class Menu {
 				if (opcion==1) {
 					System.out.println(" \n*** Ha selecionado: Un jugador ***");
 					//Llamar a Método.
-					TresEnRaya.main(null);
+					TresEnRaya.llamada(null);
 					
 				} else if (opcion==2) {
 					System.out.println(" \n*** Ha selecionado: Dos jugadores ***");
