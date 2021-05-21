@@ -12,7 +12,10 @@ public class Menu {
 	public static int opcion=0;
     public static boolean check = false;
     
-	
+	/**
+	 * Muestra el menú del programa, cuando termine de acabar una opción y recorra<br>
+	 * el método que conlleve el uso de una opción, volverá al menú de inicio.
+	 */
 	public static void Menu_inicio()
 	{	System.out.println
 			(" * * * MENÚ TRES EN RAYA * * * \n"
@@ -35,6 +38,7 @@ public class Menu {
 				} else if (opcion==2) {
 					System.out.println(" \n*** Ha selecionado: Dos jugadores ***");
 					//Llamar a Método.
+					
 				} else if (opcion==3) {
 					System.out.println(" \n*** Ha selecionado: Reglas del juego ***");
 					Normas_lectura();
