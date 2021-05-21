@@ -40,7 +40,6 @@ public class Menu {
 					Normas_lectura();
 					
 				} else if (opcion==4) {
-					//Llamar a Método.
 					System.out.println(" \n*** Ha selecionado: Salir del juego ***");
 					
 				} else if (opcion>=5 || opcion<=0) {
