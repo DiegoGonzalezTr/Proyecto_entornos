@@ -342,10 +342,12 @@ public class TresEnRaya {
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
 	}
 
-	public static void main(String[] args) {
+	public static void llamada(String[] args) {
 		impo();
 		
 	
 	}
+
+	
 
 }
