@@ -271,18 +271,7 @@ public class TresEnRaya {
 	
 	
 	
-	/*public static boolean empate(char[][] array_tablero, char ficha, char tablero_vacio) {
-		for (int i = 0; i < array_tablero.length; i++) {
-			for (int j = 0; j < array_tablero[0].length; j++) {
-				// Con que en una celda me encuente un "/" entonces suponemos que se puede
-				// seguir jugando
-				if ((array_tablero[i][j] != ficha && array_tablero[i][j] ==tablero_vacio )) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}*/
+	
 
 	public static char ganadorColumna(char[][] array_tablero, char tablero_vacio) {
 
@@ -363,9 +352,15 @@ public class TresEnRaya {
 		
 		return tablero_vacio;
 
+	}
+	//Te dice quien es el mejor de las tres partidas
+	public static void mejor_de_tres() {
+		if((contador_victorias_jug1-contador_derrotas_jug1)==3){
+			System.out.println("El ganador es:" + nombreJugadorSc1);
+		}else if((contador_victorias_jug1-contador_derrotas_jug2)==(-3)) {
+			System.out.println("El ganador es:" + nombreJugadorSc2);
 		}
-
-		
+	}
 
 	public static void info() {
 		//Indicamos nombres de los jugadores al comenzar el programa.
@@ -445,8 +440,10 @@ public class TresEnRaya {
 	public static void llamada(String[] args) {
 		info();
 		jugar();
+		jugar();
+		jugar();
+		mejor_de_tres();
 		MenuFinal.Menu_final();
-		
 		
 	
 	}
