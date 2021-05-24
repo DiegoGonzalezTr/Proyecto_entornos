@@ -14,14 +14,15 @@ public class MenuFinal {
     
 	
 	public static void Menu_final()
-	{	System.out.println
-			(" * * * MENÚ FINAL * * * \n"
-			+"  [1] | Volver a jugar\n"
-			+"  [2] | Regresar al menú inicial\n"
-			+"  [3] | Salir del juego.\n\n"
-			+"  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
+	{	
 		try {	
 			do {	
+				System.out.println
+				(" * * * MENÚ FINAL * * * \n"
+				+"  [1] | Volver a jugar\n"
+				+"  [2] | Regresar al menú inicial\n"
+				+"  [3] | Salir del juego.\n\n"
+				+"  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
 			
 				System.out.print("\nEliga una opción del Menú: ");
 				opcion = escribir.nextInt();
