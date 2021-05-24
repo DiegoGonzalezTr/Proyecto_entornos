@@ -19,8 +19,8 @@ public class TresEnRaya {
 	public static int contador_victorias_jug2=0;
 	public static int contador_derrotas_jug1=0;
 	public static int contador_derrotas_jug2=0;
-	public static int contador_empates_jug1=0;
-	public static int contador_empates_jug2=0;
+	public static int contador_empates_jug=0;
+
 	
 	
 	/** Muestra información de los contadores del juego, <br>
@@ -30,8 +30,8 @@ public class TresEnRaya {
 	 */
 	public static void MostrarInfoContadores()
 	{	System.out.println(" *** | INFO CONTADORES | ***\n"
-		+nombreJugadorSc1+" \tVict/ "+contador_victorias_jug1+" Derr/ "+contador_derrotas_jug1+" Empt/ "+contador_empates_jug1+"\n" 
-		+nombreJugadorSc2+" \tVict/ "+contador_victorias_jug2+" Derr/ "+contador_derrotas_jug2+" Empt/ "+contador_empates_jug2+"\n"
+		+nombreJugadorSc1+" \tVict:"+contador_victorias_jug1+" Derr: "+contador_derrotas_jug1+" Empt: "+contador_empates_jug+"\n" 
+		+nombreJugadorSc2+" \tVict: "+contador_victorias_jug2+" Derr: "+contador_derrotas_jug2+" Empt: "+contador_empates_jug+"\n"
 		);
 	}
 	
@@ -56,8 +56,14 @@ public class TresEnRaya {
 	 * @author Diego Gonzalez Tripero. [Cualquier cosa comentarle a el].
 	 */
 	public static void quienGana(char[][] array_tablero, char jugador1, char jugador2, char tablero_vacio) {
-
-		char  ficha = ganadorLinea(array_tablero,tablero_vacio);
+		char  ficha;
+		
+		boolean empate=false;
+		
+		if(empate==true) {
+			System.out.println("Empate");
+		}
+		ficha = ganadorLinea(array_tablero,tablero_vacio);
 		
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
@@ -66,11 +72,13 @@ public class TresEnRaya {
 			contador_derrotas_jug2++;
 			MostrarInfoContadores();
 			
-		} else {
+			
+		} else if(ficha != jugador1) {
 			System.out.println("Gana  "+ nombreJugadorSc2 + " porque ha hecho una linea");
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
+			
 			}
 		}
 		
@@ -85,11 +93,13 @@ public class TresEnRaya {
 			contador_victorias_jug1++;
 			contador_derrotas_jug2++;
 			MostrarInfoContadores();
+			
 		} else {
 			System.out.println("Gana "+ nombreJugadorSc2 +" porque ha hecho una columna");
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
+			
 			}
 		}
 		
@@ -107,6 +117,7 @@ public class TresEnRaya {
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
+			
 			}
 		}	
 		
@@ -121,14 +132,20 @@ public class TresEnRaya {
 			contador_derrotas_jug2++;
 			MostrarInfoContadores();
 			
+			
 		} else {
 			System.out.println("Gana  " +nombreJugadorSc2 +" porque ha hecho una diagonal inversa");
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
 			
+			
 			}
 		}	
+		
+	
+		
+	
 	}
 
 	public static boolean gameOver(char[][] array_tablero, char tablero_vacio) {
@@ -138,7 +155,7 @@ public class TresEnRaya {
 				|| ganadorColumna(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorLinea(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorDiagonalPrincipal(array_tablero, tablero_vacio) != tablero_vacio
-				|| ganadorDiagonalInversa(array_tablero, tablero_vacio) != tablero_vacio) {
+				|| ganadorDiagonalInversa(array_tablero, tablero_vacio) != tablero_vacio){
 			return true;
 		}
 		return false;
@@ -154,7 +171,12 @@ public class TresEnRaya {
 				}
 			}
 		}
+		contador_empates_jug++;
+		MostrarInfoContadores();
+		System.out.println("Empate");
+		
 		return true;
+		
 	}
 
 	// metodo que usamos para saber si donde queremos poener un valor esta vacio o
@@ -246,6 +268,21 @@ public class TresEnRaya {
 		return tablero_vacio;
 
 	}
+	
+	
+	
+	/*public static boolean empate(char[][] array_tablero, char ficha, char tablero_vacio) {
+		for (int i = 0; i < array_tablero.length; i++) {
+			for (int j = 0; j < array_tablero[0].length; j++) {
+				// Con que en una celda me encuente un "/" entonces suponemos que se puede
+				// seguir jugando
+				if ((array_tablero[i][j] != ficha && array_tablero[i][j] ==tablero_vacio )) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}*/
 
 	public static char ganadorColumna(char[][] array_tablero, char tablero_vacio) {
 
@@ -330,7 +367,15 @@ public class TresEnRaya {
 
 		
 
-	public static void impo() {
+	public static void info() {
+		//Indicamos nombres de los jugadores al comenzar el programa.
+		System.out.println("Introduce el nombre del jugador 1");
+		nombreJugadorSc1= String.valueOf(sc.nextLine());
+		System.out.println("Introduce el nombre del jugador 2");
+		nombreJugadorSc2 = String.valueOf(sc.nextLine());
+	}
+	
+	public static void jugar() {
 		// creamos las variables necesarias para el programa
 		char jugador1 = 'X';
 		char jugador2 = 'O';
@@ -338,13 +383,6 @@ public class TresEnRaya {
 		insetarDatos();
 		int fil, colum;
 		boolean filaCorrecta, ColumnaCorrecta, correcto;
-		
-		//Indicamos nombres de los jugadores al comenzar el programa.
-		System.out.println("Introduce el nombre del jugador 1");
-		nombreJugadorSc1= String.valueOf(sc.nextLine());
-		System.out.println("Introduce el nombre del jugador 2");
-		nombreJugadorSc2 = String.valueOf(sc.nextLine());
-		
 		//Mientras no se acabe el juego lo seguimos ejecutando
 		while (!gameOver(array_tablero, tablero_vacio)) {
 			
@@ -405,7 +443,10 @@ public class TresEnRaya {
 	}
 
 	public static void llamada(String[] args) {
-		impo();
+		info();
+		jugar();
+		MenuFinal.Menu_final();
+		
 		
 	
 	}

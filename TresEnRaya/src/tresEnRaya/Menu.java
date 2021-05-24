@@ -18,15 +18,16 @@ public class Menu {
 	 * el método que conlleve el uso de una opción, volverá al menú de inicio.
 	 */
 	public static void Menu_inicio()
-	{	System.out.println
-			(" * * * MENÚ TRES EN RAYA * * * \n"
-			+"  [1] | Modo de juego: Un jugador\n"
-			+"  [2] | Modo de dos jugadores: Un jugador\n"
-			+"  [3] | Reglas\n"
-			+"  [4] | Salir del juego.\n\n"
-			+"  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
+	{	
 		try {	
 			do {	
+				System.out.println
+				(" * * * MENÚ TRES EN RAYA * * * \n"
+				+"  [1] | Modo de juego: Un jugador\n"
+				+"  [2] | Modo de dos jugadores: Un jugador\n"
+				+"  [3] | Reglas\n"
+				+"  [4] | Salir del juego.\n\n"
+				+"  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
 			
 				System.out.print("\nEliga una opción del Menú: ");
 				opcion = escribir.nextInt();
