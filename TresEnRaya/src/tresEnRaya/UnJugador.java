@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @author Jesús Blanco Antoraz.
  */
 public class UnJugador {
+	//Atributos de la clase: UnJugador.
 	// Tablero de juego:
 	public static char array_tablero[][] = new char[3][3];
 	public static char tablero_vacio = '/';
@@ -24,6 +25,9 @@ public class UnJugador {
 	public static int contador_derrotas_jug2=0;
 	public static int contador_empates_jug=0;
 	
+	
+	// A partir de abajo se incluyen los métodos.
+	// Contadores de Vic/Derr/Empt de partidas.
 	public static void MostrarInfoContadores()
 	{	System.out.println(" *** | INFO CONTADORES | ***\n"
 		+nombre_jugador+" \tVict:"+contador_victorias_jug1+" Derr: "+contador_derrotas_jug1+" Empt: "+contador_empates_jug+"\n" 
@@ -31,11 +35,13 @@ public class UnJugador {
 		);
 	}
 	
+	// Introducir nombres de jugadores.
 	public static void IntroduzcaSuNombre()
 	{	System.out.println("Introduzca su nombre: ");
 		nombre_jugador= String.valueOf(sc.nextLine());
 	}
 	
+	// Mostrar turnos con nombres de jugadores.
 	public static void nombres_de_jugadores(boolean turno) {
 		if (turno) {
 			System.out.println(nombre_jugador);
@@ -44,6 +50,7 @@ public class UnJugador {
 		}
 	}
 	
+	// Mostrar el tablero de juego.
 	public static void verTablero() {
 		for (int i = 0; i < array_tablero.length; i++) {
 			for (int j = 0; j < array_tablero[0].length; j++) {
@@ -53,6 +60,7 @@ public class UnJugador {
 		}
 	}
 	
+	// Inserta datos en el tablero.
 	public static void insetarDatos() {
 		for (int i = 0; i < array_tablero.length; i++) {
 			for (int j = 0; j < array_tablero.length; j++) {
@@ -61,12 +69,12 @@ public class UnJugador {
 		}
 	}
 	
+	// Insertar ficha de juego en el tablero.
 	public static void insertarDatos(char[][] array_tablero, int fil, int colum, char tablero_vacio) {
 		array_tablero[fil][colum] = tablero_vacio;
 	}
 	
-	
-	
+	// Juego Tres en Raya.
 	public static void jugar() {
 		// creamos las variables necesarias para el programa
 		char jugador1 = 'X';
@@ -134,8 +142,7 @@ public class UnJugador {
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
 	}
 	
-	
-	
+	// Comprobar Filas.
 	public static boolean comprobarFil(char[][] array_tablero, int fil) {
 		//Si el numero de fila que introduce el usuario esta entre 0 y 3 entonce es correcto (true)
 		if (fil >= 0 && fil <= array_tablero.length) {
@@ -144,7 +151,7 @@ public class UnJugador {
 		return false;
 	}
 
-	// Comprobar columna
+	// Comprobar columna.
 	public static boolean comprobarColum(char[][] array_tablero, int colum) {
 		//Si el numero de columna que introduce el usuario esta entre 0 y 3 entonce es correcto (true)
 		if (colum >= 0  && colum <= array_tablero.length) {
@@ -161,9 +168,137 @@ public class UnJugador {
 		return false;
 	}
 	
+	public static boolean matrizCompleta(char[][] array_tablero, char tablero_vacio) {
+		for (int i = 0; i < array_tablero.length; i++) {
+			for (int j = 0; j < array_tablero[0].length; j++) {
+				// Con que en una celda me encuente un "/" entonces suponemos que se puede
+				// seguir jugando
+				if (array_tablero[i][j] == tablero_vacio) {
+					return false;
+				}
+			}
+		}
+		contador_empates_jug++;
+		MostrarInfoContadores();
+		System.out.println("Empate");
+		return true;
+	}
+
+	// Caso de ganador en Columna.
+	public static char ganadorColumna(char[][] array_tablero, char tablero_vacio) {
+
+		char ficha;
+		boolean ganador;
+		for (int i = 0; i < array_tablero.length; i++) {
+
+			// yo voy a ser ganador hasta que algo de lo que hay mas abajo sear false,
+			// entonces ya no sere ganador
+			ganador = true;
+
+			ficha = array_tablero[0][i];
+			// Si en la siguiente posicion no hay un / me interesa seguir,
+			if (ficha != tablero_vacio) {
+				for (int j = 1; j < array_tablero[0].length; j++) {
+					if (ficha != array_tablero[j][i]) {
+						// Si una ficha que esta en la misma fila no coincide con el resto, entonces no
+						// hay 3 en raya
+						ganador = false;
+					}
+
+				}
+				if (ganador == true) {
+					return ficha;
+				}
+
+			}
+
+		}
+		return tablero_vacio;
+
+	}
+	
+	// Caso de ganador de Linea.
+	public static char ganadorLinea(char[][] array_tablero, char tablero_vacio) {
+
+		char ficha;
+		boolean ganador;
+		for (int i = 0; i < array_tablero.length; i++) {
+
+			// yo voy a ser ganador hasta que algo de lo que hay mas abajo sear false,
+			// entonces ya no sere ganador
+			ganador = true;
+			// cojemos el primero de cada fila
+			ficha = array_tablero[i][0];
+			// Si en la siguiente posicion no hay un / me interesa seguir,
+			if (ficha != tablero_vacio) {
+				for (int j = 1; j < array_tablero[0].length; j++) {
+					if (ficha != array_tablero[i][j]) {
+						// Si una ficha que esta en la misma fila no coincide con el resto, entonces no
+						// hay 3 en raya
+						ganador = false;
+					}
+
+				}
+				if (ganador == true) {
+					return ficha;
+				}
+
+			}
+
+		}
+		return tablero_vacio;
+
+	}
+	
+	// Caso de ganador en Diagonal 1.
+	public static char ganadorDiagonalPrincipal(char[][] array_tablero, char tablero_vacio) {
+		char ficha;
+		boolean ganador = true;
+		ficha = array_tablero[0][0];
+		// si en la posicion 0,0 tenemos una ficha, entonces, empezemos a evaluar si
+		// podemos tener una diagonal principal ganadora
+		if (ficha != tablero_vacio) {
+			for (int i = 1; i < array_tablero.length; i++) {
+				//
+				if (ficha != array_tablero[i][i]) {
+					ganador = false;
+				}
+			}
+			if (ganador) {
+				return ficha;
+			}
+		}
+
+		return tablero_vacio;
+
+	}
+
+	// Caso de ganador en Diagonal 2.
+	public static char ganadorDiagonalInversa(char[][] array_tablero, char tablero_vacio) {
+		char ficha;
+		boolean ganador = true;
+		ficha = array_tablero[0][2];
+		// si en la posicion 0,0 tenemos una ficha, entonces, empezemos a evaluar si
+		// podemos tener una diagonal principal ganadora
+		if (ficha != tablero_vacio) {
+			for (int i = 1, j=1; i < array_tablero.length;i++,j--) {
+				// las filas disminuyen
+					if (ficha != array_tablero[i][j]) {
+						ganador = false;
+					}
+				}
+			if (ganador == true) {
+				return ficha;
+			}
+			}
+		
+		return tablero_vacio;
+
+	}
+
+	// Casos de finalización del juego.
 	public static boolean gameOver(char[][] array_tablero, char tablero_vacio) {
-		// Si tenemos linea, columna , diagonales o toda la matriz llena, la partida
-		// acaba
+		// Si tenemos linea, columna , diagonales o toda la matriz llena, la partida finaliza.
 		if (matrizCompleta(array_tablero, tablero_vacio)
 				|| ganadorColumna(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorLinea(array_tablero, tablero_vacio) != tablero_vacio
@@ -174,6 +309,7 @@ public class UnJugador {
 		return false;
 	}
 	
+	// Casos de victoria en el juego.
 	public static void quienGana(char[][] array_tablero, char jugador1, char jugador2, char tablero_vacio) {
 		char  ficha;
 		boolean empate=false;
@@ -255,6 +391,7 @@ public class UnJugador {
 		
 	}
 	
+	// Main, ejecución del programa orden.
 	public static void main(String[] args) {
 	}
 
