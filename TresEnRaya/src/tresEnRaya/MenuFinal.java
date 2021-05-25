@@ -29,7 +29,6 @@ public class MenuFinal {
 				
 				if (opcion==1) {
 					System.out.println(" \n*** Ha selecionado: Volver a jugar ***");
-				//	LLamar a metodo
 					TresEnRaya.jugada();
 					
 				} else if (opcion==2) {

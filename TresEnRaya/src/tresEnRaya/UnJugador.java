@@ -442,7 +442,7 @@ public class UnJugador {
 		jugar();
 		jugar();
 		mejor_de_tres();
-		MenuFinal.Menu_final();
+		MenuFinal_UnJugador.Menu_final();
 	}
 	
 	public static void llamada(String[] args) {
