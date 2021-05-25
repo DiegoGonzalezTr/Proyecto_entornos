@@ -207,6 +207,7 @@ public class TresEnRaya {
 		for (int i = 0; i < array_tablero.length; i++) {
 			for (int j = 0; j < array_tablero[0].length; j++) {
 				if (array_tablero[i][j]!= tablero_vacio || 
+					empate(array_tablero, tablero_vacio, tablero_vacio)||
 					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
 					ganadorColumna(array_tablero, tablero_vacio)==ficha ||
 					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
