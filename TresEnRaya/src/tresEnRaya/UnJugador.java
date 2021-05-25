@@ -81,7 +81,9 @@ public class UnJugador {
 		char jugador2 = 'O';
 		boolean turno = true;
 		insetarDatos();
-		int fil, colum;
+		
+		// Incializamos la variable para poder usar los valores después del IF.
+		int fil=0, colum = 0;
 		boolean filaCorrecta, ColumnaCorrecta, correcto;
 		//Mientras no se acabe el juego lo seguimos ejecutando
 		while (!gameOver(array_tablero, tablero_vacio)) {
@@ -93,16 +95,31 @@ public class UnJugador {
 				verTablero();
 				correcto = false;
 							
-				
+				if (turno==true) {
 				System.out.println("Indique la fila");
 				fil = Integer.valueOf(sc.nextInt());
 				/*Le restamos uno a lo que introduce el usuario para que el usuario no tenga que empezar contando por
-				 * la fila 0 y columna 0
+				 * la fila 0 y columna 0 de esta forma es mucho mas sencillo para usuarios no normales.
 				 */
 				fil=fil-1;
 				System.out.println("Indique la columna");
 				colum = Integer.valueOf(sc.nextInt());
 				colum=colum-1;
+				
+				/* Aquí añado que si el turno es de el BOT, las posiciones
+				 * dónde vaya a incluir la ficha serán aleatorios, si está ocupada generará
+				 * otra posición aleatorio así hasta que ocupe la posición correcta que esté
+				 * vacia. No hay criterio de filas ni columnas solo aleatoriamente.
+				 */
+				} else if (turno==false) {
+					int Fmin=1, Fmax=3;
+					int Cmin=1, Cmax=3;
+					fil = (int) (Fmin+(Math.random()*(Fmax-Fmin+1)));
+					fil=fil-1;
+					
+					colum = (int) (Cmin+(Math.random()*(Cmax-Cmin+1)));
+					colum=colum-1;
+				}
 				
 				/*
 				 * hay que comprobar que los numeros que introduce el usuario son validos para
@@ -317,6 +334,7 @@ public class UnJugador {
 		// Empate.
 		if(empate==true) {
 			System.out.println("Empate");
+		} else {
 		}
 		ficha = ganadorLinea(array_tablero,tablero_vacio);
 		
@@ -391,8 +409,23 @@ public class UnJugador {
 		
 	}
 	
+	// Caso que indica quien ha sido el mejor en las tres partidas. Según Victorias/Derrotas.
+	public static void mejor_de_tres() {
+		if((contador_victorias_jug1-contador_derrotas_jug1)==3){
+			System.out.println("El ganador es:" + nombre_jugador);
+		}else if((contador_victorias_jug1-contador_derrotas_jug2)==(-3)) {
+			System.out.println("El ganador es:" + nombre_BOT);
+		}
+	}
+	
 	// Main, ejecución del programa orden.
 	public static void main(String[] args) {
+		IntroduzcaSuNombre();
+		jugar();
+		jugar();
+		jugar();
+		mejor_de_tres();
+		MenuFinal.Menu_final();
 	}
 
 }
