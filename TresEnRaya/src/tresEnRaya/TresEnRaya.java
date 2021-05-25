@@ -19,9 +19,6 @@ public class TresEnRaya {
 	public static int contador_victorias_jug2=0;
 	public static int contador_derrotas_jug1=0;
 	public static int contador_derrotas_jug2=0;
-	public static int contador_empates_jug=0;
-
-	
 	
 	/** Muestra información de los contadores del juego, <br>
 	 * una vez termina la partida, se muestran, se suma +1 a las victorias y +1 <br>
@@ -30,8 +27,8 @@ public class TresEnRaya {
 	 */
 	public static void MostrarInfoContadores()
 	{	System.out.println(" *** | INFO CONTADORES | ***\n"
-		+nombreJugadorSc1+" \tVict:"+contador_victorias_jug1+" Derr: "+contador_derrotas_jug1+" Empt: "+contador_empates_jug+"\n" 
-		+nombreJugadorSc2+" \tVict: "+contador_victorias_jug2+" Derr: "+contador_derrotas_jug2+" Empt: "+contador_empates_jug+"\n"
+		+nombreJugadorSc1+" \tVict:"+contador_victorias_jug1+" Derr: "+contador_derrotas_jug1+"\n" 
+		+nombreJugadorSc2+" \tVict: "+contador_victorias_jug2+" Derr: "+contador_derrotas_jug2+"\n"
 		);
 	}
 	
@@ -41,7 +38,6 @@ public class TresEnRaya {
 			for (int j = 0; j < array_tablero.length; j++) {
 				array_tablero[i][j] = tablero_vacio;
 			}
-
 		}
 	}
 
@@ -152,7 +148,7 @@ public class TresEnRaya {
 		// Si tenemos linea, columna , diagonales o toda la matriz llena, la partida
 		// acaba
 		if (matrizCompleta(array_tablero, tablero_vacio)
-				||empate(array_tablero, tablero_vacio, tablero_vacio)
+				|| empate(array_tablero, tablero_vacio, tablero_vacio)
 				|| ganadorColumna(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorLinea(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorDiagonalPrincipal(array_tablero, tablero_vacio) != tablero_vacio
@@ -172,12 +168,8 @@ public class TresEnRaya {
 				}
 			}
 		}
-		contador_empates_jug++;
 		MostrarInfoContadores();
-		System.out.println("Empate");
-		
 		return true;
-		
 	}
 
 	// metodo que usamos para saber si donde queremos poener un valor esta vacio o
@@ -216,12 +208,9 @@ public class TresEnRaya {
 				}
 			}
 		}
-		contador_empates_jug++;
 		MostrarInfoContadores();
-		System.out.println("Empate");
 		return true;
 	}
-
 
 	/* Los jugadores especifican los nombres, por defecto el jugador 1 y 2. Indican nombre
 	 * Sirve para reconocer quien tiene que jugar y quien comienza.
@@ -289,10 +278,6 @@ public class TresEnRaya {
 
 	}
 	
-	
-	
-	
-
 	public static char ganadorColumna(char[][] array_tablero, char tablero_vacio) {
 
 		char ficha;
@@ -467,13 +452,7 @@ public class TresEnRaya {
 
 	public static void llamada(String[] args) {
 		info();
-		jugar();
-		jugar();
-		jugar();
-		mejor_de_tres();
-		MenuFinal.Menu_final();
-		
-	
+		jugada();
 	}
 
 	

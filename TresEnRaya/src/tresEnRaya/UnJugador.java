@@ -23,15 +23,14 @@ public class UnJugador {
 	public static int contador_victorias_jug2=0;
 	public static int contador_derrotas_jug1=0;
 	public static int contador_derrotas_jug2=0;
-	public static int contador_empates_jug=0;
 	
 	
 	// A partir de abajo se incluyen los métodos.
 	// Contadores de Vic/Derr/Empt de partidas.
 	public static void MostrarInfoContadores()
 	{	System.out.println(" *** | INFO CONTADORES | ***\n"
-		+nombre_jugador+" \tVict:"+contador_victorias_jug1+" Derr: "+contador_derrotas_jug1+" Empt: "+contador_empates_jug+"\n" 
-		+nombre_BOT+" \tVict: "+contador_victorias_jug2+" Derr: "+contador_derrotas_jug2+" Empt: "+contador_empates_jug+"\n"
+		+nombre_jugador+" \tVict:"+contador_victorias_jug1+" Derr: "+contador_derrotas_jug1+"\n" 
+		+nombre_BOT+" \tVict: "+contador_victorias_jug2+" Derr: "+contador_derrotas_jug2+"\n"
 		);
 	}
 	
@@ -205,9 +204,6 @@ public class UnJugador {
 				}
 			}
 		}
-		
-		
-		
 		return true;
 		
 	}
@@ -216,7 +212,7 @@ public class UnJugador {
 	public static boolean empate(char[][] array_tablero, char tablero_vacio, char ficha) {
 		for (int i = 0; i < array_tablero.length; i++) {
 			for (int j = 0; j < array_tablero[0].length; j++) {
-				if (array_tablero[i][j]!= tablero_vacio || 
+				if (matrizCompleta(array_tablero, tablero_vacio)||
 					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
 					ganadorColumna(array_tablero, tablero_vacio)==ficha ||
 					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
@@ -225,9 +221,7 @@ public class UnJugador {
 				}
 			}
 		}
-		contador_empates_jug++;
 		MostrarInfoContadores();
-		System.out.println("Empate");
 		return true;
 	}
 	
@@ -360,9 +354,6 @@ public class UnJugador {
 	// Casos de victoria en el juego.
 	public static void quienGana(char[][] array_tablero, char jugador1, char jugador2, char tablero_vacio) {
 		char  ficha;
-		boolean empate=false;
-		
-		
 		
 		ficha = ganadorLinea(array_tablero,tablero_vacio);
 		
@@ -446,14 +437,17 @@ public class UnJugador {
 		}
 	}
 	
-	// Main, ejecución del programa orden.
-	public static void main(String[] args) {
-		IntroduzcaSuNombre();
+	public static void jugada() {
 		jugar();
 		jugar();
 		jugar();
 		mejor_de_tres();
 		MenuFinal.Menu_final();
+	}
+	
+	public static void llamada(String[] args) {
+		IntroduzcaSuNombre();
+		jugada();
 	}
 
 }
