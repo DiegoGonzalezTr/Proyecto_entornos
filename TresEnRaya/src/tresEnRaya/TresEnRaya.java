@@ -455,6 +455,14 @@ public class TresEnRaya {
 		verTablero();
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
 	}
+	
+	public static void jugada() {
+		jugar();
+		jugar();
+		jugar();
+		mejor_de_tres();
+		MenuFinal.Menu_final();
+	}
 
 	public static void llamada(String[] args) {
 		info();
