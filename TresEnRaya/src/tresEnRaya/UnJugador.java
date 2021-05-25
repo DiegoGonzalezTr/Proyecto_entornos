@@ -90,9 +90,12 @@ public class UnJugador {
 			
 			
 			do {
-				nombres_de_jugadores(turno);
 				//CaraOCruz.LanzarMonedaCaraOCruz();
-				verTablero();
+				if (turno==true) {
+					nombres_de_jugadores(turno);
+					verTablero();
+				} else {
+				}
 				correcto = false;
 							
 				if (turno==true) {
@@ -121,8 +124,7 @@ public class UnJugador {
 					colum=colum-1;
 				}
 				
-				/*
-				 * hay que comprobar que los numeros que introduce el usuario son validos para
+				/* hay que comprobar que los numeros que introduce el usuario son validos para
 				 * nuestro array de 3x3 y tambien que donde el usuario quiera introducir un
 				 * valor, la celda tiene que estar libre
 				 */
@@ -135,14 +137,21 @@ public class UnJugador {
 						// Le estoy diciendo que no es correcto para que recorra todo el do while
 						correcto = true;
 					} else {
-						System.out.println(
-								"¡Tramposo!, El lugar donde quiere introducir la ficha esta ocupado, introducelo en un lugar libre");
+								if (turno==true) {
+								System.out.println("¡Tramposo!, El lugar donde quiere introducir la ficha esta ocupado, introducelo en un lugar libre");
+								} else if (turno==false) {		
+									/* El BOT, no necesita saber que la posición esta mal mediante consola
+									 * Se omite imprimir el mensaje por consola, pero la comprueba igualmente.
+									 * Este mensaje es solo para los jugadores reales, ej: 1vs Bot ó 1vs1.
+									 */
+								}
 					}
 				} else {
 					System.out.println("Los números que has introducido están fuera del tablero, introducelos de nuevo");
 				}
-			} while (!correcto); // hasta que no se cumpla que el usuario introduzca los datos correctos el
-									// programa seguirá preguntando
+			} while (!correcto); /* hasta que no se cumpla que el usuario introduzca los datos correctos el 
+								  * programa seguirá preguntando
+								  */
 
 			// Ahora introduccimos el valor
 			if (turno) {
@@ -155,6 +164,7 @@ public class UnJugador {
 			turno = !turno;
 			
 		}
+		
 		verTablero();
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
 	}
@@ -195,12 +205,29 @@ public class UnJugador {
 				}
 			}
 		}
+		
+		
+		/*
+		 * COPIA DE LO QUE ANTES HACIA EL EMPATE.
 		contador_empates_jug++;
 		MostrarInfoContadores();
 		System.out.println("Empate");
 		return true;
+		*/
 	}
 
+	// Caso de Empate.
+	public static boolean empate(char[][] array_tablero, char tablero_vacio, char ficha) {
+		for (int i = 0; i < array_tablero.length; i++) {
+			for (int j = 0; j < array_tablero[0].length; j++) {
+				if (array_tablero[i][j]!= tablero_vacio && ganadorLinea(array_tablero, tablero_vacio)==ficha ) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	// Caso de ganador en Columna.
 	public static char ganadorColumna(char[][] array_tablero, char tablero_vacio) {
 
@@ -332,10 +359,14 @@ public class UnJugador {
 		boolean empate=false;
 		
 		// Empate.
+		/*
 		if(empate==true) {
 			System.out.println("Empate");
 		} else {
+			empate=false;
 		}
+		*/
+		
 		ficha = ganadorLinea(array_tablero,tablero_vacio);
 		
 		if (ficha != tablero_vacio) {
