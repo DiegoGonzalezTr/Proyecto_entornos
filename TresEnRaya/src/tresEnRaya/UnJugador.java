@@ -207,24 +207,27 @@ public class UnJugador {
 		}
 		
 		
-		/*
-		 * COPIA DE LO QUE ANTES HACIA EL EMPATE.
-		contador_empates_jug++;
-		MostrarInfoContadores();
-		System.out.println("Empate");
+		
 		return true;
-		*/
+		
 	}
 
 	// Caso de Empate.
 	public static boolean empate(char[][] array_tablero, char tablero_vacio, char ficha) {
 		for (int i = 0; i < array_tablero.length; i++) {
 			for (int j = 0; j < array_tablero[0].length; j++) {
-				if (array_tablero[i][j]!= tablero_vacio && ganadorLinea(array_tablero, tablero_vacio)==ficha ) {
+				if (array_tablero[i][j]!= tablero_vacio || 
+					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
+					ganadorColumna(array_tablero, tablero_vacio)==ficha ||
+					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
+					ganadorDiagonalPrincipal(array_tablero, tablero_vacio)==ficha) {
 					return false;
 				}
 			}
 		}
+		contador_empates_jug++;
+		MostrarInfoContadores();
+		System.out.println("Empate");
 		return true;
 	}
 	
@@ -344,6 +347,7 @@ public class UnJugador {
 	public static boolean gameOver(char[][] array_tablero, char tablero_vacio) {
 		// Si tenemos linea, columna , diagonales o toda la matriz llena, la partida finaliza.
 		if (matrizCompleta(array_tablero, tablero_vacio)
+				|| empate(array_tablero, tablero_vacio, tablero_vacio)
 				|| ganadorColumna(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorLinea(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorDiagonalPrincipal(array_tablero, tablero_vacio) != tablero_vacio
@@ -358,14 +362,7 @@ public class UnJugador {
 		char  ficha;
 		boolean empate=false;
 		
-		// Empate.
-		/*
-		if(empate==true) {
-			System.out.println("Empate");
-		} else {
-			empate=false;
-		}
-		*/
+		
 		
 		ficha = ganadorLinea(array_tablero,tablero_vacio);
 		

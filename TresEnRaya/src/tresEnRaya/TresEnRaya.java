@@ -152,6 +152,7 @@ public class TresEnRaya {
 		// Si tenemos linea, columna , diagonales o toda la matriz llena, la partida
 		// acaba
 		if (matrizCompleta(array_tablero, tablero_vacio)
+				||empate(array_tablero, tablero_vacio, tablero_vacio)
 				|| ganadorColumna(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorLinea(array_tablero, tablero_vacio) != tablero_vacio
 				|| ganadorDiagonalPrincipal(array_tablero, tablero_vacio) != tablero_vacio
@@ -200,6 +201,24 @@ public class TresEnRaya {
 			}
 			System.out.println(" ");
 		}
+	}
+	
+	public static boolean empate(char[][] array_tablero, char tablero_vacio, char ficha) {
+		for (int i = 0; i < array_tablero.length; i++) {
+			for (int j = 0; j < array_tablero[0].length; j++) {
+				if (array_tablero[i][j]!= tablero_vacio || 
+					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
+					ganadorColumna(array_tablero, tablero_vacio)==ficha ||
+					ganadorLinea(array_tablero, tablero_vacio)==ficha ||
+					ganadorDiagonalPrincipal(array_tablero, tablero_vacio)==ficha) {
+					return false;
+				}
+			}
+		}
+		contador_empates_jug++;
+		MostrarInfoContadores();
+		System.out.println("Empate");
+		return true;
 	}
 
 
