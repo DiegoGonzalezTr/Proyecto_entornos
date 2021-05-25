@@ -380,19 +380,18 @@ public class TresEnRaya {
 		char jugador1 = 'X';
 		char jugador2 = 'O';
 		boolean turno = true;
+		
 		insetarDatos();
 		int fil, colum;
 		boolean filaCorrecta, ColumnaCorrecta, correcto;
 		//Mientras no se acabe el juego lo seguimos ejecutando
 		while (!gameOver(array_tablero, tablero_vacio)) {
-			
+		verTablero();
+		correcto = false;
 			
 			do {
 				nombres_de_jugadores(turno);
-				//CaraOCruz.LanzarMonedaCaraOCruz();
-				verTablero();
-				correcto = false;
-							
+				
 				
 				System.out.println("Indique la fila");
 				fil = Integer.valueOf(sc.nextInt());
