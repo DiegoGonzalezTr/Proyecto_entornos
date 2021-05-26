@@ -7,22 +7,28 @@ import java.util.Scanner;
  * @author Jesús Blanco Antoraz.
  */
 
+/** Clase de Tres En Raya<br> Permite jugar a dos jugadores.*/
 public class TresEnRaya {
-	public static char array_tablero[][] = new char[3][3];
-	public static char tablero_vacio = '/';
-	public static Scanner sc = new Scanner(System.in);
-	public static  String nombreJugadorSc1, nombreJugadorSc2;
-	public static boolean empiezaJugador1=false,empiezaJugador2=false;
+	/**Array del tablero de juego y dimensiones*/
+	public static char array_tablero[][] = new char[3][3];		
 	
-	/**
-	 * Contadores de juego:<br>
-	 * Almacenan las victorias del mayor de tres y derrotas<br>
-	 * que haya realizado el jugador en la partida<br>.
-	 */
-	public static int contador_victorias_jug1=0;
+	/**Indica posición Tablero vacio*/
+	public static char tablero_vacio = '/';						
+	
+	/**Scanner para poder escribir valores*/
+	public static Scanner sc = new Scanner(System.in); 			
+	
+	/**Nombres jugadores*/
+	public static  String nombreJugadorSc1, nombreJugadorSc2; 	
+	
+	/**Contador de victorias Jugador 1. */
+	public static int contador_victorias_jug1=0; 
+	/**Contador de victorias Jugador 2. */
 	public static int contador_victorias_jug2=0;
+	/**Contador de derrotas Jugador 1. */
 	public static int contador_derrotas_jug1=0;
-	public static int contador_derrotas_jug2=0;
+	/**Contador de derrotas Jugador 2. */
+	public static int contador_derrotas_jug2=0;		
 	
 	/** Muestra información de los contadores del juego, <br>
 	 * una vez termina la partida, se muestran, se suma +1 a las victorias y +1 <br>
@@ -52,21 +58,18 @@ public class TresEnRaya {
 	/**
 	 * Se definen todos los casos de victorias que puedan realizar los jugadores<br>
 	 * sobre el tablero, realizando distintas acciones y llamadas a métodos.<br>
-	 * @param array_tablero
-	 * @param jugador1
-	 * @param jugador2
-	 * @param tablero_vacio
+	 * @param array_tablero Tablero con fichas actuales
+	 * @param jugador1 Jugador 1.
+	 * @param jugador2 Jugador 2.
+	 * @param tablero_vacio	Tablero vacio.
 	 */
 	public static void quienGana(char[][] array_tablero, char jugador1, char jugador2, char tablero_vacio) {
 		char  ficha;
-		
 		boolean empate=false;
-		
 		if(empate==true) {
 			System.out.println("Empate");
 		}
 		ficha = ganadorLinea(array_tablero,tablero_vacio);
-		
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
 			System.out.println("Gana  "+ nombreJugadorSc1 + " porque ha hecho una linea");
@@ -74,23 +77,17 @@ public class TresEnRaya {
 			contador_derrotas_jug2++;
 			MostrarInfoContadores();
 			
-			
 		} else if(ficha != jugador1) {
 			System.out.println("Gana  "+ nombreJugadorSc2 + " porque ha hecho una linea");
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
-			
 			}
 		}
 		
-		
-
 		ficha = ganadorColumna(array_tablero, tablero_vacio);
-		
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
-			
 			System.out.println("Gana  "+ nombreJugadorSc1 + " porque ha hecho una columna");
 			contador_victorias_jug1++;
 			contador_derrotas_jug2++;
@@ -101,11 +98,9 @@ public class TresEnRaya {
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
-			
 			}
 		}
-		
-		
+
 		ficha = ganadorDiagonalPrincipal(array_tablero, tablero_vacio);
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
@@ -119,44 +114,33 @@ public class TresEnRaya {
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
-			
 			}
 		}	
-		
-		
-		
+
 		ficha = ganadorDiagonalInversa(array_tablero, tablero_vacio);
-		
 		if (ficha != tablero_vacio) {
 			if (ficha == jugador1) {
 			System.out.println("Gana  "+ nombreJugadorSc1 + " porque ha hecho una diagonal inversas");
 			contador_victorias_jug1++;
 			contador_derrotas_jug2++;
 			MostrarInfoContadores();
-			
-			
+
 		} else {
 			System.out.println("Gana  " +nombreJugadorSc2 +" porque ha hecho una diagonal inversa");
 			contador_victorias_jug2++;
 			contador_derrotas_jug1++;
 			MostrarInfoContadores();
-			
-			
 			}
 		}	
-		
-	
-		
-	
 	}
 
 	/**
 	 * Casos en los cuales la partida detecta que se ha terminado.<br>
 	 * Con negación podemos dar los casos en los quehaya empates, y<br>
 	 * distintas vicotrias según haya hecho columna, linea, diagonal.<br>
-	 * @param array_tablero
-	 * @param tablero_vacio
-	 * @return
+	 * @param array_tablero Tablero
+	 * @param tablero_vacio Tablero Vacio
+	 * @return Devuelve true si, la partida tiene un caso de finalización.
 	 */
 	public static boolean gameOver(char[][] array_tablero, char tablero_vacio) {
 		// Si tenemos linea, columna , diagonales o toda la matriz llena, la partida
@@ -173,10 +157,10 @@ public class TresEnRaya {
 	}
 
 	/**
-	 * Casos en los que se muestra el final del contador.<br>
-	 * @param array_tablero
-	 * @param tablero_vacio
-	 * @return
+	 * Muestra el tablero tras haber realizado la introducción de una ficha en el.<br>
+	 * @param array_tablero Tablero
+	 * @param tablero_vacio Tablero vacio
+	 * @return Sí en el tablero, se introduce una ficha dentro de la matriz, se muestra.
 	 */
 	public static boolean matrizCompleta(char[][] array_tablero, char tablero_vacio) {
 		for (int i = 0; i < array_tablero.length; i++) {
@@ -194,11 +178,11 @@ public class TresEnRaya {
 
 	/**
 	 * Método que usamos para saber si donde queremos poener un valor esta vacio o no.<br>
-	 * @param array_tablero
-	 * @param fil
-	 * @param colum
-	 * @param tablero_vacio
-	 * @return
+	 * @param array_tablero Tablero
+	 * @param fil Filas del tablero.
+	 * @param colum Columnas del tablero.
+	 * @param tablero_vacio Tablero vacio
+	 * @return Sí la casilla del tablero está vacia, se pone la ficha del jugador.
 	 */
 	public static boolean estaLibre(char[][] array_tablero, int fil, int colum, int tablero_vacio) {
 		if (array_tablero[fil][colum] != tablero_vacio) {
@@ -209,10 +193,10 @@ public class TresEnRaya {
 
 	/**
 	 * Con este metodo insetamos las fichas en el array.
-	 * @param array_tablero
-	 * @param fil
-	 * @param colum
-	 * @param tablero_vacio
+	 * @param array_tablero Tablero.
+	 * @param fil Filas tablero.
+	 * @param colum Columnas tablero
+	 * @param tablero_vacio Tablero vacio
 	 */
 	public static void insertarDatos(char[][] array_tablero, int fil, int colum, char tablero_vacio) {
 		array_tablero[fil][colum] = tablero_vacio;
@@ -233,10 +217,10 @@ public class TresEnRaya {
 	/**
 	 * Método para casos de empate, en el caso de que ningún jugador<br>
 	 * haya podido realizar una victoria de 3 en linea, diagonal.
-	 * @param array_tablero
-	 * @param tablero_vacio
-	 * @param ficha
-	 * @return
+	 * @param array_tablero tablero.
+	 * @param tablero_vacio tablero vacio.
+	 * @param ficha fichas del tablero.
+	 * @return Delvuelve true en el caso de que haya habido un empate.
 	 */
 	public static boolean empate(char[][] array_tablero, char tablero_vacio, char ficha) {
 		for (int i = 0; i < array_tablero.length; i++) {
@@ -252,11 +236,13 @@ public class TresEnRaya {
 			}
 		}
 		MostrarInfoContadores();
+		System.out.println("¡Ha habido un Empate, continuar jugando!");
 		return true;
 	}
 
 	/** Los jugadores especifican los nombres, por defecto el jugador 1 y 2. Indican nombre<br>
 	 * Sirve para reconocer quien tiene que jugar y quien comienza.
+	 * @param turno Turno del jugador si es true, jugador1 si es false jugador 2.
 	 */
 	public static void nombres_de_jugadores(boolean turno) {
 		if (turno) {
@@ -266,11 +252,11 @@ public class TresEnRaya {
 		}
 	}
 
-	// Comprobar fila
 	/**
-	 * @param array_tablero
-	 * @param fil
-	 * @return
+	 * Comprueba la fila del tablero.
+	 * @param array_tablero tablero.
+	 * @param fil filas del tablero.
+	 * @return develve true si la fila es correcta.
 	 */
 	public static boolean comprobarFil(char[][] array_tablero, int fil) {
 		//Si el numero de fila que introduce el usuario esta entre 0 y 3 entonce es correcto (true)
@@ -280,7 +266,12 @@ public class TresEnRaya {
 		return false;
 	}
 
-	// Comprobar columna
+	/**
+	 * Comprueba la columna del tablero.
+	 * @param array_tablero tablero.
+	 * @param colum Columnas del tablero.
+	 * @return develve true si la columna es correcta.
+	 */
 	public static boolean comprobarColum(char[][] array_tablero, int colum) {
 		//Si el numero de columna que introduce el usuario esta entre 0 y 3 entonce es correcto (true)
 		if (colum >= 0  && colum <= array_tablero.length) {
@@ -289,6 +280,17 @@ public class TresEnRaya {
 		return false;
 	}
 
+	/**
+	 * Comprueba si el jugador ha hecho una Línea en el tablero.<br>
+	 * yo voy a ser ganador hasta que algo de lo que hay mas abajo sear false,<br>
+	 * entonces ya no sere ganador<br>
+	 * Si en la siguiente posicion no hay un / me interesa seguir.<br>
+	 * Si una ficha que esta en la misma fila no coincide con el resto, entonces no<br>
+		hay 3 en raya<br>
+	 * @param array_tablero tablero.
+	 * @param tablero_vacio tablero vacio
+	 * @return develve true si la linea es correcta.
+	 */
 	public static char ganadorLinea(char[][] array_tablero, char tablero_vacio) {
 
 		char ficha;
@@ -308,19 +310,21 @@ public class TresEnRaya {
 						// hay 3 en raya
 						ganador = false;
 					}
-
 				}
 				if (ganador == true) {
 					return ficha;
 				}
-
 			}
-
 		}
 		return tablero_vacio;
-
 	}
 	
+	/**
+	 * 
+	 * @param array_tablero tablero
+	 * @param tablero_vacio tablero vacio
+	 * @return develve true si la columna es correcta.
+	 */
 	public static char ganadorColumna(char[][] array_tablero, char tablero_vacio) {
 
 		char ficha;
@@ -354,8 +358,8 @@ public class TresEnRaya {
 	}
 	
 	/**
-	 * @param array_tablero
-	 * @param tablero_vacio
+	 * @param array_tablero tablero
+	 * @param tablero_vacio tablero vacio
 	 * @return me devuelve la ficha que ha hecho una diagonal principal
 	 */
 	public static char ganadorDiagonalPrincipal(char[][] array_tablero, char tablero_vacio) {
@@ -380,6 +384,13 @@ public class TresEnRaya {
 
 	}
 
+	/**
+	 * Si en la posicion 0,0 tenemos una ficha, entonces, empezemos a evaluar si<br>
+	 *	podemos tener una diagonal principal ganadora.<br>
+	 * @param array_tablero tablero
+	 * @param tablero_vacio tablero vacio
+	 * @return develve true si la diagonal es correcta.
+	 */
 	public static char ganadorDiagonalInversa(char[][] array_tablero, char tablero_vacio) {
 		char ficha;
 		boolean ganador = true;
@@ -401,7 +412,9 @@ public class TresEnRaya {
 		return tablero_vacio;
 
 	}
-	//Te dice quien es el mejor de las tres partidas
+	/**
+	 * Método para comprobar quien es el mejor de las tres partidas
+	 */
 	public static void mejor_de_tres() {
 		if((contador_victorias_jug1-contador_derrotas_jug1)==3){
 			System.out.println("El ganador es:" + nombreJugadorSc1);
@@ -410,6 +423,9 @@ public class TresEnRaya {
 		}
 	}
 
+	/**
+	 * Introducir y almacenar los valores de los jugadores para próximas partidas.
+	 */
 	public static void info() {
 		//Indicamos nombres de los jugadores al comenzar el programa.
 		System.out.println("Introduce el nombre del jugador 1");
@@ -418,6 +434,9 @@ public class TresEnRaya {
 		nombreJugadorSc2 = String.valueOf(sc.nextLine());
 	}
 	
+	/**
+	 * Método base del juego: Se desarrolla la partida y el orden de ejecución<br>
+	 */
 	public static void jugar() {
 		// creamos las variables necesarias para el programa
 		char jugador1 = 'X';
@@ -484,6 +503,12 @@ public class TresEnRaya {
 		quienGana(array_tablero, jugador1, jugador2, tablero_vacio);
 	}
 	
+	/**
+	 * Métdo utilizado para realizar 3 partidas y una vez finalizen<br>
+	 * Utilizar el método mejor_de_tres() para comprobar quien ha ganado<br>
+	 * Luego vuelve al menú final, da varias opciones, por ejemplo:<br>
+	 * Volvera jugar<br>.
+	 */
 	public static void jugada() {
 		jugar();
 		jugar();
@@ -492,6 +517,12 @@ public class TresEnRaya {
 		MenuFinal.Menu_final();
 	}
 
+	/**
+	 * Método utilizado para llamar a la Clase desde el menú<br>
+	 * Una vez llamada, almacena valores de los jugadores en el caso de qu haya habido una<br>
+	 * partida anterior ó si no, pide a los jugadores introducir sus nombres.
+	 * @param args llamda_volver_A_jugar
+	 */
 	public static void llamada(String[] args) {
 		info();
 		jugada();
