@@ -80,11 +80,10 @@ public class Menu {
 	 */
 	public static void Normas_lectura() { // Muestra con un sysout en consola las normas del juego.
 		System.out.println("  | 1. | Selección de modo de juego: un jugador (contra la máquina) o dos jugadores.\r\n"
-				+ "  | 2. | Seléccion de nombre de los jugadores.\r\n"
-				+ "  | 3. | Cara o cruz para ver quien hace el primer movimiento, en las siguientes veces será el perdedor.\r\n"
-				+ "  | 4. | Los jugadores pondrán sus fichas hasta que alguno haga tres en raya o el tablero esté completo.\r\n"
-				+ "  | 5. | El juego se finaliza cuando uno de los jugadores consiga 3 victorias.\r\n"
-				+ "  | 6. | Cuando se acabe la partida se volverá al menú.");
+				+ "  | 2. | Introducir de nombre de los jugadores.\r\n"
+				+ "  | 3. | Los jugadores pondrán sus fichas hasta que alguno haga tres en raya o el tablero esté completo.\r\n"
+				+ "  | 4. | El juego se finaliza cuando se juegan 3 partidas.\r\n"
+				+ "  | 5. | Cuando se acabe la partida aparecerá un menú que le permite jugar de nuevo o salir del juego.");
 	}
 
 	/**
