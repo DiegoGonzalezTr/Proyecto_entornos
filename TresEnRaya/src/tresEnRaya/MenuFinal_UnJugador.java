@@ -4,9 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * @author Javier Hernández
- * @author Diego Gonzalez Tripero
- * @author Jesús Blanco Antoraz
+ * @author Diego Gonzalez Tripero.
+ * @author Javier Hernandez Fernandez.
+ * @author Jesús Blanco Antoraz.
+ * @version 0.4.5 27/05/2021 9:35
  */
 
 /**

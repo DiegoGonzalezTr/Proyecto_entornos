@@ -3,9 +3,10 @@ package tresEnRaya;
 import java.util.Scanner;
 
 /**
- * @author Diego Gonzalez Tripero. [Más productivo].
+ * @author Diego Gonzalez Tripero.
  * @author Javier Hernandez Fernandez.
  * @author Jesús Blanco Antoraz.
+ *  * @version 0.4.4 26/05/2021 9:35
  */
 
 /** Tres en Raya | Clase Un Jugador, jugar mediante un bot. 1 Jugador. */
@@ -38,14 +39,14 @@ public class UnJugador {
 	 * a las derrotas de solamente el perdedor.<br>
 	 */
 	public static void MostrarInfoContadores() {
-		System.out.println(" *** | INFO CONTADORES | ***\n" + nombre_jugador + " \tVict:" + contador_victorias_jug1
+		System.out.println("\n *** | INFO CONTADORES | ***\n" + nombre_jugador + " \tVict:" + contador_victorias_jug1
 				+ " Derr: " + contador_derrotas_jug1 + "\n" + nombre_BOT + " \tVict: " + contador_victorias_jug2
 				+ " Derr: " + contador_derrotas_jug2 + "\n");
 	}
 
 	/** Introducir Nombre de jugador 1 */
 	public static void IntroduzcaSuNombre() {
-		System.out.println("Introduzca su nombre: ");
+		System.out.print("Introduzca su nombre: ");
 		nombre_jugador = String.valueOf(sc.nextLine());
 	}
 
@@ -57,9 +58,9 @@ public class UnJugador {
 	 */
 	public static void nombres_de_jugadores(boolean turno) {
 		if (turno) {
-			System.out.println(nombre_jugador);
+			System.out.println("\nEs tu turno: "+nombre_jugador+"\n");
 		} else {
-			System.out.println(nombre_BOT);
+			System.out.println("\nEs tu turno: "+nombre_BOT+"\n");
 		}
 	}
 
@@ -118,7 +119,6 @@ public class UnJugador {
 		while (!gameOver(array_tablero, tablero_vacio)) {
 
 			do {
-				// CaraOCruz.LanzarMonedaCaraOCruz();
 				if (turno == true) {
 					nombres_de_jugadores(turno);
 					verTablero();
@@ -127,7 +127,7 @@ public class UnJugador {
 				correcto = false;
 
 				if (turno == true) {
-					System.out.println("Indique la fila");
+					System.out.print("Indique la fila: ");
 					fil = Integer.valueOf(sc.nextInt());
 					/*
 					 * Le restamos uno a lo que introduce el usuario para que el usuario no tenga
@@ -135,7 +135,7 @@ public class UnJugador {
 					 * sencillo para usuarios no normales.
 					 */
 					fil = fil - 1;
-					System.out.println("Indique la columna");
+					System.out.print("Indique la columna: ");
 					colum = Integer.valueOf(sc.nextInt());
 					colum = colum - 1;
 
@@ -555,14 +555,20 @@ public class UnJugador {
 
 	}
 
-	/**
-	 * Método para comprobar quien es el mejor de las tres partidas
-	 */
+	/** Método para comprobar quien es el mejor de las tres partidas y quien ha ganado durante las 3 rondas. */
 	public static void mejor_de_tres() {
 		if ((contador_victorias_jug1 - contador_derrotas_jug1) == 3) {
 			System.out.println("El ganador es:" + nombre_jugador);
 		} else if ((contador_victorias_jug1 - contador_derrotas_jug2) == (-3)) {
 			System.out.println("El ganador es:" + nombre_BOT);
+		}
+		
+		if (contador_victorias_jug1>contador_victorias_jug2) {
+			System.out.println("** \\ El ganador es: "+nombre_jugador+" // **");
+		} else if (contador_victorias_jug2>contador_victorias_jug1) {
+			System.out.println("** \\ El ganador es: "+nombre_BOT+" // **");
+		} else if ((contador_victorias_jug2==contador_victorias_jug1) || (contador_victorias_jug1==contador_victorias_jug2)) {
+			System.out.println("** \\ Empate entre los dos jugadores | ¡Buena partida! // **\n");
 		}
 	}
 

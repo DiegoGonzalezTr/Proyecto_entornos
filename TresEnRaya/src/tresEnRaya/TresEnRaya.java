@@ -3,9 +3,10 @@ package tresEnRaya;
 import java.util.Scanner;
 
 /**
- * @author Diego Gonzalez Tripero. [Más productivo].
+ * @author Diego Gonzalez Tripero.
  * @author Javier Hernandez Fernandez.
  * @author Jesús Blanco Antoraz.
+ * @version 0.4.5 27/05/2021 9:35
  */
 
 /**
@@ -40,7 +41,7 @@ public class TresEnRaya {
 	 * a las derrotas de solamente el perdedor.<br>
 	 */
 	public static void MostrarInfoContadores() {
-		System.out.println(" *** | INFO CONTADORES | ***\n" + nombreJugadorSc1 + " \tVict:" + contador_victorias_jug1
+		System.out.println("\n *** | INFO CONTADORES | ***\n" + nombreJugadorSc1 + " \tVict: " + contador_victorias_jug1
 				+ " Derr: " + contador_derrotas_jug1 + "\n" + nombreJugadorSc2 + " \tVict: " + contador_victorias_jug2
 				+ " Derr: " + contador_derrotas_jug2 + "\n");
 	}
@@ -223,6 +224,7 @@ public class TresEnRaya {
 			}
 			System.out.println(" ");
 		}
+		System.out.println();
 	}
 
 	/**
@@ -261,9 +263,9 @@ public class TresEnRaya {
 	 */
 	public static void nombres_de_jugadores(boolean turno) {
 		if (turno) {
-			System.out.println(nombreJugadorSc1);
+			System.out.println("\nTurno de: "+nombreJugadorSc1);
 		} else {
-			System.out.println(nombreJugadorSc2);
+			System.out.println("\nTurno de: "+nombreJugadorSc2);
 		}
 	}
 
@@ -437,14 +439,20 @@ public class TresEnRaya {
 
 	}
 
-	/**
-	 * Método para comprobar quien es el mejor de las tres partidas
-	 */
+	/** Método para comprobar quien es el mejor de las tres partidas y quien ha ganado durante las 3 rondas. */
 	public static void mejor_de_tres() {
 		if ((contador_victorias_jug1 - contador_derrotas_jug1) == 3) {
 			System.out.println("El ganador es:" + nombreJugadorSc1);
 		} else if ((contador_victorias_jug1 - contador_derrotas_jug2) == (-3)) {
 			System.out.println("El ganador es:" + nombreJugadorSc2);
+		}
+		
+		if (contador_victorias_jug1>contador_victorias_jug2) {
+			System.out.println("** \\ El ganador es: "+nombreJugadorSc1+" // **");
+		} else if (contador_victorias_jug2>contador_victorias_jug1) {
+			System.out.println("** \\ El ganador es: "+nombreJugadorSc2+" // **");
+		} else if ((contador_victorias_jug2==contador_victorias_jug1) || (contador_victorias_jug1==contador_victorias_jug2)) {
+			System.out.println("** \\ Empate entre los dos jugadores | ¡Buena partida! // **\n");
 		}
 	}
 
@@ -453,9 +461,9 @@ public class TresEnRaya {
 	 */
 	public static void info() {
 		// Indicamos nombres de los jugadores al comenzar el programa.
-		System.out.println("Introduce el nombre del jugador 1");
+		System.out.print("Introduce el nombre del jugador 1: ");
 		nombreJugadorSc1 = String.valueOf(sc.nextLine());
-		System.out.println("Introduce el nombre del jugador 2");
+		System.out.print("Introduce el nombre del jugador 2: ");
 		nombreJugadorSc2 = String.valueOf(sc.nextLine());
 	}
 
@@ -473,20 +481,20 @@ public class TresEnRaya {
 		boolean filaCorrecta, ColumnaCorrecta, correcto;
 		// Mientras no se acabe el juego lo seguimos ejecutando
 		while (!gameOver(array_tablero, tablero_vacio)) {
-			verTablero();
 			correcto = false;
 
 			do {
 				nombres_de_jugadores(turno);
-
-				System.out.println("Indique la fila");
+				verTablero();
+				
+				System.out.print("Indique la fila: ");
 				fil = Integer.valueOf(sc.nextInt());
 				/*
 				 * Le restamos uno a lo que introduce el usuario para que el usuario no tenga
 				 * que empezar contando por la fila 0 y columna 0
 				 */
 				fil = fil - 1;
-				System.out.println("Indique la columna");
+				System.out.print("Indique la columna: ");
 				colum = Integer.valueOf(sc.nextInt());
 				colum = colum - 1;
 
@@ -537,8 +545,11 @@ public class TresEnRaya {
 	 * .
 	 */
 	public static void jugada() {
+		System.out.println("Ronda 1");
 		jugar();
+		System.out.println("Ronda 2");
 		jugar();
+		System.out.println("Ronda 3");
 		jugar();
 		mejor_de_tres();
 		MenuFinal.Menu_final();

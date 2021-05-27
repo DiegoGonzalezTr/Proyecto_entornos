@@ -4,9 +4,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * @author Jesús Blanco Antoraz
- * @author Diego Gonzalez Tripero
- * @author Javier Hernandez Fernandez
+ * @author Diego Gonzalez Tripero.
+ * @author Javier Hernandez Fernandez.
+ * @author Jesús Blanco Antoraz.
  * @version 0.4.5 27/05/2021 9:35
  */
 
@@ -28,7 +28,7 @@ public class Menu {
 		try {
 			do {
 				System.out.println(" * * * MENÚ TRES EN RAYA * * * \n" + "  [1] | Modo de juego: Un jugador\n"
-						+ "  [2] | Modo de dos jugadores: Un jugador\n" + "  [3] | Reglas\n"
+						+ "  [2] | Modo de juego: Dos jugadores\n" + "  [3] | Reglas\n"
 						+ "  [4] | Salir del juego.\n\n"
 						+ "  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
 
