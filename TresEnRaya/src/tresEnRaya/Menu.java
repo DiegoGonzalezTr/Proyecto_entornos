@@ -1,5 +1,4 @@
 package tresEnRaya;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -83,9 +82,10 @@ public class Menu {
 				+ "  | 2. | Introducir de nombre de los jugadores.\r\n"
 				+ "  | 3. | Los jugadores pondrán sus fichas hasta que alguno haga tres en raya o el tablero esté completo.\r\n"
 				+ "  | 4. | El juego se finaliza cuando se juegan 3 partidas.\r\n"
-				+ "  | 5. | Cuando se acabe la partida aparecerá un menú que le permite jugar de nuevo o salir del juego.");
+				+ "  | 5. | Cuando se acabe la partida aparecerá un menú que le permite jugar de nuevo o salir del juego.\n\n");
 	}
 
+	
 	/**
 	 * Carga la clase Menú de Inicio, el usuario podrá selecionar su opción.<br>
 	 * 
