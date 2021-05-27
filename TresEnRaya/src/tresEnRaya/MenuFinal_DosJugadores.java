@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Menú Final | 2 Jugadores | Permite selecionar varias opciones <br>
  * del menú de juego.
  */
-public class MenuFinal {
+public class MenuFinal_DosJugadores {
 	/** Permite al usuario introducir valores */
 	public static Scanner escribir = new Scanner(System.in);
 	/** Seleciona la opción de menú valor predeterminado */

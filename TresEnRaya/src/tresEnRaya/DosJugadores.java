@@ -552,7 +552,7 @@ public class DosJugadores {
 		System.out.println("Ronda 3");
 		jugar();
 		mejor_de_tres();
-		MenuFinal.Menu_final();
+		MenuFinal_DosJugadores.Menu_final();
 	}
 
 	/**
