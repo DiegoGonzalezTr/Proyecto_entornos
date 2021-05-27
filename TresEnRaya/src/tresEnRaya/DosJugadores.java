@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Tres en Raya | Clase de Tres En Raya<br>
  * Permite jugar a dos jugadores.
  */
-public class TresEnRaya {
+public class DosJugadores {
 	/** Array del tablero de juego y dimensiones */
 	public static char array_tablero[][] = new char[3][3];
 

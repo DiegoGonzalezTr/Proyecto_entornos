@@ -43,7 +43,7 @@ public class Menu {
 					/** Opción parajugar entre dos jugadores: Jug1 y Jug2 */
 				} else if (opcion == 2) {
 					System.out.println(" \n*** Ha selecionado: Dos jugadores ***");
-					TresEnRaya.llamada(null);
+					DosJugadores.llamada(null);
 
 					/** Opción para leer las normas de juego */
 				} else if (opcion == 3) {
