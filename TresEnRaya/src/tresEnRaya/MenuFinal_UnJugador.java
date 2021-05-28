@@ -1,6 +1,6 @@
 package tresEnRaya;
 
-import java.util.InputMismatchException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -23,15 +23,16 @@ public class MenuFinal_UnJugador {
 	/** Revisa que el usuario hay escrito correctamente el valor correcto */
 	public static boolean check = false;
 
-	/** Menú Final, permite al usuario selecionar varias opciones de juego */
-	public static void Menu_final() {
-		try {
+	/** Menú Final, permite al usuario selecionar varias opciones de juego 
+	 * @throws IOException Control de errores. */
+	public static void Menu_final() throws IOException {
 			do {
 				System.out.println(" * * * MENÚ FINAL * * * \n" + "  [1] | Volver a jugar\n"
 						+ "  [2] | Regresar al menú inicial\n" + "  [3] | Salir del juego.\n\n"
 						+ "  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
 
 				System.out.print("\nEliga una opción del Menú: ");
+				comprobarEntero();
 				opcion = escribir.nextInt();
 
 				if (opcion == 1) {
@@ -53,14 +54,16 @@ public class MenuFinal_UnJugador {
 				}
 
 			} while (!(opcion == 3));
-
-		} catch (InputMismatchException e) {
-			System.out.println("Seleciona una opción, en formato digito.");
-			System.out.print("\nEliga una opción del Menú: ");
-			opcion = escribir.nextInt();
-			check = true;
-		}
-
+			//Menu.CerrarEscritura();
 	}
+	
+	private static void comprobarEntero()
+	{	while (!escribir.hasNextInt()) {
+			System.out.println("¡Vaya! Has escrito una opción no valida... ¡Recuerda introduce solo el número!\n");
+			System.out.print("Indique el valor: ");
+			escribir.next();
+		}
+	}
+	
 
 }

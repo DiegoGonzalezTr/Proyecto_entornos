@@ -1,5 +1,6 @@
 package tresEnRaya;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -488,6 +489,7 @@ public class DosJugadores {
 				verTablero();
 				
 				System.out.print("Indique la fila: ");
+				comprobarEntero();
 				fil = Integer.valueOf(sc.nextInt());
 				/*
 				 * Le restamos uno a lo que introduce el usuario para que el usuario no tenga
@@ -495,6 +497,7 @@ public class DosJugadores {
 				 */
 				fil = fil - 1;
 				System.out.print("Indique la columna: ");
+				comprobarEntero();
 				colum = Integer.valueOf(sc.nextInt());
 				colum = colum - 1;
 
@@ -543,8 +546,9 @@ public class DosJugadores {
 	 * Luego vuelve al menú final, da varias opciones, por ejemplo:<br>
 	 * Volvera jugar<br>
 	 * .
+	 * @throws IOException Control de errores.
 	 */
-	public static void jugada() {
+	public static void jugada() throws IOException {
 		System.out.println("Ronda 1");
 		jugar();
 		System.out.println("Ronda 2");
@@ -553,6 +557,7 @@ public class DosJugadores {
 		jugar();
 		mejor_de_tres();
 		MenuFinal_DosJugadores.Menu_final();
+		//Menu.CerrarEscritura();
 	}
 
 	/**
@@ -562,10 +567,22 @@ public class DosJugadores {
 	 * partida anterior ó si no, pide a los jugadores introducir sus nombres.
 	 * 
 	 * @param args llamda_volver_A_jugar
+	 * @throws IOException Control de errores.
 	 */
-	public static void llamada(String[] args) {
+	public static void llamada(String[] args) throws IOException {
 		info();
 		jugada();
+	}
+	
+	/**
+	 * Comprobar caracteres no validos.
+	 */
+	private static void comprobarEntero()
+	{	while (!sc.hasNextInt()) {
+			System.out.println("¡Vaya! Has escrito una opción no valida... ¡Recuerda introduce solo el número!\n");
+			System.out.print("Indique el valor: ");
+			sc.next();
+		}
 	}
 
 }

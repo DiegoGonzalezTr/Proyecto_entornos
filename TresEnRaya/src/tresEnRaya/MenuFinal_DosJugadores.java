@@ -1,6 +1,6 @@
 package tresEnRaya;
 
-import java.util.InputMismatchException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -25,44 +25,48 @@ public class MenuFinal_DosJugadores {
 	/**
 	 * Usuario puede selecionar una opción del menú final, una vez<br>
 	 * haya finalizado de jugar 3 partidas, Gana el mejor de 3.
+	 * @throws IOException Control de errores.
 	 */
-	public static void Menu_final() {
-		try {
-			do {
-				System.out.println(" * * * MENÚ FINAL * * * \n" + "  [1] | Volver a jugar\n"
-						+ "  [2] | Regresar al menú inicial\n" + "  [3] | Salir del juego.\n\n"
-						+ "  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
+	public static void Menu_final() throws IOException {
+		do {
+			System.out.println(" * * * MENÚ FINAL * * * \n" + "  [1] | Volver a jugar\n"
+					+ "  [2] | Regresar al menú inicial\n" + "  [3] | Salir del juego.\n\n"
+					+ "  Créditos: @Diego_Gonzalez | @Jesús_Blanco | @Javier_Hernández\n");
 
-				System.out.print("\nEliga una opción del Menú: ");
-				opcion = escribir.nextInt();
-
-				if (opcion == 1) {
-					System.out.println(" \n*** Ha selecionado: Volver a jugar ***");
-					DosJugadores.jugada();
-
-				} else if (opcion == 2) {
-					System.out.println(" \n*** Ha selecionado: Regresar al menú inicial ***");
-					Menu.Menu_inicio();
-
-				} else if (opcion == 3) {
-					System.out.println(" \n*** Ha selecionado: Salir del juego ***");
-
-				} else if (opcion >= 3 || opcion <= 0) {
-					System.out.println(" \n*** ¡Debes selecionar una opción valida! ***");
-
-				} else if (opcion == (int) opcion) {
-					check = false;
-				}
-
-			} while (!(opcion == 3));
-
-		} catch (InputMismatchException e) {
-			System.out.println("Seleciona una opción, en formato digito.");
 			System.out.print("\nEliga una opción del Menú: ");
+			comprobarEntero();
 			opcion = escribir.nextInt();
-			check = true;
-		}
 
+			if (opcion == 1) {
+				System.out.println(" \n*** Ha selecionado: Volver a jugar ***");
+				DosJugadores.jugada();
+
+			} else if (opcion == 2) {
+				System.out.println(" \n*** Ha selecionado: Regresar al menú inicial ***");
+				Menu.Menu_inicio();
+
+			} else if (opcion == 3) {
+				System.out.println(" \n*** Ha selecionado: Salir del juego ***");
+
+			} else if (opcion >= 3 || opcion <= 0) {
+				System.out.println(" \n*** ¡Debes selecionar una opción valida! ***");
+
+			} else if (opcion == (int) opcion) {
+				check = false;
+			}
+
+		} while (!(opcion == 3));
+		//Menu.CerrarEscritura();
 	}
-
+	
+	/**
+	 * Comprobar caracteres no validos.
+	 */
+	private static void comprobarEntero()
+	{	while (!escribir.hasNextInt()) {
+			System.out.println("¡Vaya! Has escrito una opción no valida... ¡Recuerda introduce solo el número!\n");
+			System.out.print("Indique el valor: ");
+			escribir.next();
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package tresEnRaya;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -128,6 +129,7 @@ public class UnJugador {
 
 				if (turno == true) {
 					System.out.print("Indique la fila: ");
+					comprobarEntero();
 					fil = Integer.valueOf(sc.nextInt());
 					/*
 					 * Le restamos uno a lo que introduce el usuario para que el usuario no tenga
@@ -136,6 +138,7 @@ public class UnJugador {
 					 */
 					fil = fil - 1;
 					System.out.print("Indique la columna: ");
+					comprobarEntero();
 					colum = Integer.valueOf(sc.nextInt());
 					colum = colum - 1;
 
@@ -578,13 +581,15 @@ public class UnJugador {
 	 * Luego vuelve al menú final, da varias opciones, por ejemplo:<br>
 	 * Volvera jugar<br>
 	 * .
+	 * @throws IOException Control de errores.
 	 */
-	public static void jugada() {
+	public static void jugada() throws IOException {
 		jugar();
 		jugar();
 		jugar();
 		mejor_de_tres();
 		MenuFinal_UnJugador.Menu_final();
+		//Menu.CerrarEscritura();
 	}
 
 	/**
@@ -594,10 +599,22 @@ public class UnJugador {
 	 * partida anterior ó si no, pide a los jugadores introducir sus nombres.
 	 * 
 	 * @param args llamda_volver_A_jugar
+	 * @throws IOException Control de errores.
 	 */
-	public static void llamada(String[] args) {
+	public static void llamada(String[] args) throws IOException {
 		IntroduzcaSuNombre();
 		jugada();
+	}
+	
+	/**
+	 * Comprobar caracteres no validos.
+	 */
+	private static void comprobarEntero()
+	{	while (!sc.hasNextInt()) {
+			System.out.println("¡Vaya! Has escrito una opción no valida... ¡Recuerda introduce solo el número!\n");
+			System.out.print("Indique el valor: ");
+			sc.next();
+		}
 	}
 
 }
